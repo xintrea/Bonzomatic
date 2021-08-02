@@ -6,6 +6,10 @@ build
 build.*
 .vs
 .DS_Store
+/CMakeSettings.json
+/*.sln
+/*.vcxproj
+/*.vcxproj.user
 
 # Linux ignore
 bonzomatic
