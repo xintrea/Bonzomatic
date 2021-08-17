@@ -131,6 +131,8 @@ int main( int argc, const char *argv[] )
       settings.sRenderer.nHeight = options.get<jsonxx::Object>( "window" ).get<jsonxx::Number>( "height" );
     if ( options.get<jsonxx::Object>( "window" ).has<jsonxx::Boolean>( "fullscreen" ) )
       settings.sRenderer.windowMode = options.get<jsonxx::Object>( "window" ).get<jsonxx::Boolean>( "fullscreen" ) ? RENDERER_WINDOWMODE_FULLSCREEN : RENDERER_WINDOWMODE_WINDOWED;
+    if ( options.get<jsonxx::Object>( "window" ).has<jsonxx::Boolean>( "mouseVisible" ) )
+      settings.sRenderer.bMouseVisible = options.get<jsonxx::Object>( "window" ).get<jsonxx::Boolean>( "mouseVisible" );
   }
   if ( !skipSetupDialog )
   {

@@ -12,6 +12,7 @@ typedef struct
   int nHeight;
   RENDERER_WINDOWMODE windowMode;
   bool bVsync;
+  bool bMouseVisible;
 } RENDERER_SETTINGS;
 
 namespace Renderer
