@@ -280,6 +280,14 @@ namespace Renderer
     glfwSetMouseButtonCallback(mWindow, mouse_button_callback);
     glfwSetScrollCallback(mWindow, scroll_callback);
 
+    // Hide mouse if need
+    if( !settings->bMouseVisible )
+    {
+      printf("[GLFW] Hide mouse\n");
+      glfwSetInputMode(mWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+    }
+    
+
     glewExperimental = GL_TRUE;
     GLenum err = glewInit();
     if (GLEW_OK != err)

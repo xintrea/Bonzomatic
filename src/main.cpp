@@ -131,6 +131,8 @@ int main( int argc, const char *argv[] )
       settings.sRenderer.nHeight = options.get<jsonxx::Object>( "window" ).get<jsonxx::Number>( "height" );
     if ( options.get<jsonxx::Object>( "window" ).has<jsonxx::Boolean>( "fullscreen" ) )
       settings.sRenderer.windowMode = options.get<jsonxx::Object>( "window" ).get<jsonxx::Boolean>( "fullscreen" ) ? RENDERER_WINDOWMODE_FULLSCREEN : RENDERER_WINDOWMODE_WINDOWED;
+    if ( options.get<jsonxx::Object>( "window" ).has<jsonxx::Boolean>( "mouseVisible" ) )
+      settings.sRenderer.bMouseVisible = options.get<jsonxx::Object>( "window" ).get<jsonxx::Boolean>( "mouseVisible" );
   }
   if ( !skipSetupDialog )
   {
@@ -179,6 +181,7 @@ int main( int argc, const char *argv[] )
   editorOptions.nTabSize = 2;
   editorOptions.bVisibleWhitespace = false;
   editorOptions.eAutoIndent = aitSmart;
+  editorOptions.bShowEditorAtStart = true;
 
   int nDebugOutputHeight = 200;
   int nTexPreviewWidth = 64;
@@ -233,6 +236,8 @@ int main( int argc, const char *argv[] )
     }
     if (options.has<jsonxx::Object>("gui"))
     {
+      printf("Loading gui options...\n");
+
       if (options.get<jsonxx::Object>("gui").has<jsonxx::Number>("outputHeight"))
         nDebugOutputHeight = options.get<jsonxx::Object>("gui").get<jsonxx::Number>("outputHeight");
       if (options.get<jsonxx::Object>("gui").has<jsonxx::Number>("texturePreviewWidth"))
@@ -260,6 +265,8 @@ int main( int argc, const char *argv[] )
         fScrollXFactor = options.get<jsonxx::Object>("gui").get<jsonxx::Number>("scrollXFactor");
       if (options.get<jsonxx::Object>("gui").has<jsonxx::Number>("scrollYFactor"))
         fScrollYFactor = options.get<jsonxx::Object>("gui").get<jsonxx::Number>("scrollYFactor");
+      if (options.get<jsonxx::Object>("gui").has<jsonxx::Boolean>("showEditorAtStart"))
+        editorOptions.bShowEditorAtStart = options.get<jsonxx::Object>("gui").get<jsonxx::Boolean>("showEditorAtStart");
     }
     if (options.has<jsonxx::Object>("theme"))
     {
@@ -396,7 +403,8 @@ int main( int argc, const char *argv[] )
   static float fftDataIntegrated[FFT_SIZE];
   memset(fftDataIntegrated, 0, sizeof(float) * FFT_SIZE);
 
-  bool bShowGui = true;
+  bool bShowGui = editorOptions.bShowEditorAtStart;
+
   Timer::Start();
   float fNextTick = 0.1f;
   float fLastTimeMS = Timer::GetTime();

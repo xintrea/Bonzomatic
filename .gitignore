@@ -1,11 +1,29 @@
-Bonzomatic
+# Windows ignore
+Bonzomatic.exe
 .obj
 tmp
 build
 build.*
 .vs
 .DS_Store
-/CMakeSettings.json
+
 /*.sln
 /*.vcxproj
 /*.vcxproj.user
+
+# Linux ignore
+bonzomatic
+*.a
+
+CMakeCache.txt
+/CMakeFiles*
+/CMakeSettings.json
+/external/glfw/CMakeFiles*
+/external/glfw/src/CMakeFiles*
+*.user
+Makefile
+cmake_install.cmake
+external/glfw/src/glfw3.pc
+external/glfw/src/glfw3Config.cmake
+external/glfw/src/glfw3ConfigVersion.cmake
+external/glfw/src/glfw_config.h
