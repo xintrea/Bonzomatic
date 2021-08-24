@@ -13,6 +13,7 @@ typedef struct
   RENDERER_WINDOWMODE windowMode;
   bool bVsync;
   bool bMouseVisible;
+  bool bCloseAtEsc;
 } RENDERER_SETTINGS;
 
 namespace Renderer
@@ -22,6 +23,7 @@ namespace Renderer
 
   extern int nWidth;
   extern int nHeight;
+ 
 
   bool OpenSetupDialog( RENDERER_SETTINGS * settings );
   bool Open( RENDERER_SETTINGS * settings );

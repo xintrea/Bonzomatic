@@ -122,6 +122,8 @@ int main( int argc, const char *argv[] )
   settings.sRenderer.nWidth = 1920;
   settings.sRenderer.nHeight = 1080;
   settings.sRenderer.windowMode = RENDERER_WINDOWMODE_FULLSCREEN;
+  settings.sRenderer.bMouseVisible=true;
+  settings.sRenderer.bCloseAtEsc=false;
 
   if ( options.has<jsonxx::Object>( "window" ) )
   {
@@ -133,6 +135,8 @@ int main( int argc, const char *argv[] )
       settings.sRenderer.windowMode = options.get<jsonxx::Object>( "window" ).get<jsonxx::Boolean>( "fullscreen" ) ? RENDERER_WINDOWMODE_FULLSCREEN : RENDERER_WINDOWMODE_WINDOWED;
     if ( options.get<jsonxx::Object>( "window" ).has<jsonxx::Boolean>( "mouseVisible" ) )
       settings.sRenderer.bMouseVisible = options.get<jsonxx::Object>( "window" ).get<jsonxx::Boolean>( "mouseVisible" );
+    if ( options.get<jsonxx::Object>( "window" ).has<jsonxx::Boolean>( "closeAtEsc" ) )
+      settings.sRenderer.bCloseAtEsc = options.get<jsonxx::Object>( "window" ).get<jsonxx::Boolean>( "closeAtEsc" );
   }
   if ( !skipSetupDialog )
   {
